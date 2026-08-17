@@ -7,6 +7,116 @@
 <title>For You ♡</title>
 
 <style>
+    /* 💌 CUSTOM BIRTHDAY POPUP */
+
+.birthday-popup {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(4, 35, 70, .45);
+    backdrop-filter: blur(5px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: .3s ease;
+
+    z-index: 9999;
+}
+
+.birthday-popup.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-box {
+    width: min(380px, 85vw);
+    padding: 25px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #dff7ff,
+            #73c7f5,
+            #b9eaff
+        );
+
+    border: 3px solid white;
+    border-radius: 18px;
+
+    box-shadow:
+        0 0 0 4px #167bc5,
+        0 0 0 7px rgba(239,45,70,.35),
+        0 0 35px rgba(255,255,255,.8);
+
+    transform: scale(.7);
+    transition: .3s ease;
+}
+
+.birthday-popup.show .popup-box {
+    transform: scale(1);
+}
+
+.popup-title {
+    margin-bottom: 18px;
+
+    font-size: 21px;
+    font-weight: bold;
+
+    color: #07599b;
+
+    text-shadow:
+        1px 1px white,
+        0 0 8px rgba(255,255,255,.8);
+}
+
+.popup-text {
+    color: #164b70;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.popup-box button {
+    margin-top: 20px;
+
+    padding: 9px 25px;
+
+    border: 2px solid white;
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #299fe9,
+        #0758a6
+    );
+
+    color: white;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 0 #06467f,
+        0 0 12px rgba(50,180,240,.6);
+}
+
+.popup-box button:hover {
+    background: linear-gradient(
+        135deg,
+        #f0445b,
+        #c91d3b
+    );
+
+    box-shadow:
+        0 4px 0 #8d1528,
+        0 0 18px rgba(239,45,70,.6);
+}
 * {
     box-sizing: border-box;
     margin: 0;
@@ -1199,9 +1309,7 @@ function finalMessage() {
 
     createHearts();
 
-    alert(
-        "Hadiah kecil ini mungkin sederhana, tapi dibuat khusus buat kamu. Makasih banget udah mau bertahan sejauh ini dan tetap milih untuk sama aku. Aku sayang kamu, lebih dari yang bisa aku tuliskan di sini. ♡"
-    );
+    showBirthdayPopup();
 
 }
 
@@ -1282,6 +1390,44 @@ function createHearts() {
 }
 
 </script>
+<!-- POP-UP TERAKHIR -->
+<div id="birthdayPopup" class="birthday-popup">
+    <div class="popup-box">
+        <div class="popup-title">💌 untuk kamu</div>
 
+        <div class="popup-text">
+            Hadiah kecil ini mungkin sederhana,<br>
+            tapi dibuat khusus buat kamu. ♡<br><br>
+            Makasih banget udah mau bertahan sejauh ini dan tetep milih sama aku.<br>
+            Aku sayang kamu, lebih dari yang bisa aku tuliskan di sini. ❤️
+        </div>
+
+        <button onclick="closeBirthdayPopup()">OKAY ♡</button>
+    </div>
+</div>
+
+<script>
+function showBirthdayPopup() {
+    document.getElementById("birthdayPopup").classList.add("show");
+}
+
+function closeBirthdayPopup() {
+    document.getElementById("birthdayPopup").classList.remove("show");
+}
+</script>
+    <!-- POP-UP TERAKHIR -->
+<div id="birthdayPopup" class="birthday-popup">
+    ...
+</div>
+
+<script>
+function showBirthdayPopup() {
+    document.getElementById("birthdayPopup").classList.add("show");
+}
+
+function closeBirthdayPopup() {
+    document.getElementById("birthdayPopup").classList.remove("show");
+}
+</script>
 </body>
 </html>
