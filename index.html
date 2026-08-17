@@ -3,595 +3,1015 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>For You ♡</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-body{
-    min-height:100vh;
-    font-family:Arial,sans-serif;
-    color:#082b63;
+html, body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #07366f;
+    overflow: hidden;
+
     background:
-        radial-gradient(circle at 10% 20%,#ffffff 0 3px,transparent 4px),
-        radial-gradient(circle at 80% 15%,#ffffff 0 2px,transparent 3px),
-        radial-gradient(circle at 60% 80%,#ffffff 0 3px,transparent 4px),
-        linear-gradient(135deg,#79c9ff,#dff5ff,#4da9ed);
-    background-size:120px 120px,170px 150px,200px 180px,100% 100%;
-    overflow-x:hidden;
+        radial-gradient(circle at 10% 20%, white 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 15%, white 0 2px, transparent 3px),
+        radial-gradient(circle at 60% 75%, white 0 2px, transparent 3px),
+        linear-gradient(135deg, #63bfff, #dff7ff, #3198e5);
+
+    background-size:
+        130px 130px,
+        180px 160px,
+        210px 190px,
+        100% 100%;
 }
 
-/* Y2K sparkle */
-.sparkle{
-    position:fixed;
-    color:white;
-    font-size:20px;
-    animation:float 5s infinite ease-in-out;
-    pointer-events:none;
+/* =========================
+   DECORATIONS
+========================= */
+
+.sparkle {
+    position: fixed;
+    color: white;
+    font-size: 20px;
+    pointer-events: none;
+    animation: sparkle 3s infinite ease-in-out;
+    z-index: 1;
 }
 
-.s1{left:8%;top:15%}
-.s2{right:12%;top:30%;animation-delay:1s}
-.s3{left:20%;bottom:15%;animation-delay:2s}
-.s4{right:25%;bottom:10%;animation-delay:3s}
+.s1 { left: 8%; top: 12%; }
+.s2 { right: 10%; top: 20%; animation-delay: 1s; }
+.s3 { left: 15%; bottom: 15%; animation-delay: 2s; }
+.s4 { right: 18%; bottom: 12%; animation-delay: .5s; }
 
-@keyframes float{
-    50%{
-        transform:translateY(-18px) rotate(15deg);
-        opacity:.5;
+@keyframes sparkle {
+    50% {
+        transform: scale(1.5) rotate(20deg);
+        opacity: .4;
     }
 }
 
-/* MAIN WINDOW */
-.window{
-    width:92%;
-    max-width:950px;
-    margin:35px auto;
-    background:rgba(235,249,255,.82);
-    border:3px solid white;
-    border-radius:14px;
+/* =========================
+   SLIDES
+========================= */
+
+.slideshow {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+
+    opacity: 0;
+    transform: scale(.96);
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+}
+
+.slide.active {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* =========================
+   WINDOWS STYLE
+========================= */
+
+.window {
+    width: min(850px, 94vw);
+    max-height: 90vh;
+
+    background: rgba(235, 249, 255, .88);
+
+    border: 3px solid white;
+    border-radius: 14px;
+
     box-shadow:
-        0 0 0 3px #1675c8,
-        10px 12px 0 rgba(4,52,105,.25),
-        0 0 40px rgba(255,255,255,.8);
-    overflow:hidden;
+        0 0 0 3px #126fc0,
+        10px 12px 0 rgba(5, 50, 100, .25),
+        0 0 35px rgba(255,255,255,.8);
+
+    overflow: hidden;
 }
 
-/* TITLE BAR */
-.titlebar{
-    background:linear-gradient(#69c7ff,#1472c9);
-    color:white;
-    padding:11px 14px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:3px solid white;
-    font-weight:bold;
+.titlebar {
+    height: 42px;
+
+    padding: 0 12px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: white;
+
+    background: linear-gradient(
+        #6bc9ff,
+        #1471c7
+    );
+
+    border-bottom: 3px solid white;
+
+    font-weight: bold;
 }
 
-.title{
-    text-shadow:2px 2px #145596;
+.window-title {
+    text-shadow: 2px 2px #145596;
 }
 
-.buttons{
-    display:flex;
-    gap:5px;
+.window-buttons {
+    display: flex;
+    gap: 5px;
 }
 
-.buttons span{
-    width:23px;
-    height:21px;
-    display:grid;
-    place-items:center;
-    background:#dff5ff;
-    color:#1765a9;
-    border:2px solid white;
-    font-size:12px;
+.window-buttons span {
+    width: 22px;
+    height: 20px;
+
+    display: grid;
+    place-items: center;
+
+    background: #e4f7ff;
+    color: #1765a9;
+
+    border: 2px solid white;
+
+    font-size: 11px;
 }
 
-.buttons span:last-child{
-    background:#e52d43;
-    color:white;
+.window-buttons span:last-child {
+    background: #df2943;
+    color: white;
 }
 
-/* NAVIGATION */
-nav{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:8px;
-    padding:12px;
-    background:#c9edff;
-    border-bottom:2px solid #5aafe9;
+/* =========================
+   CONTENT
+========================= */
+
+.content {
+    padding: 40px 30px;
+    text-align: center;
+
+    max-height: calc(90vh - 42px);
+    overflow-y: auto;
 }
 
-nav a{
-    color:#07559d;
-    text-decoration:none;
-    font-weight:bold;
-    font-size:12px;
-    padding:8px 13px;
-    border:2px solid white;
-    border-radius:20px;
-    background:linear-gradient(#fff,#a9dcfa);
-    box-shadow:2px 3px 0 #4a98cf;
+.content::-webkit-scrollbar {
+    width: 8px;
 }
 
-nav a:hover{
-    color:#e2263e;
-    transform:translateY(-2px);
+.content::-webkit-scrollbar-thumb {
+    background: #258bd3;
+    border-radius: 10px;
 }
 
-/* HERO */
-.hero{
-    text-align:center;
-    padding:65px 20px 55px;
-    background:
-        linear-gradient(rgba(255,255,255,.2),rgba(255,255,255,.2)),
-        radial-gradient(circle at 50% 30%,#ffffffaa,transparent 35%);
+/* =========================
+   OPENING
+========================= */
+
+.moon {
+    font-size: 58px;
+    margin-bottom: 15px;
+
+    filter:
+        drop-shadow(0 0 10px white)
+        drop-shadow(0 0 20px #a9e5ff);
 }
 
-.moon{
-    font-size:55px;
-    margin-bottom:10px;
-    filter:drop-shadow(0 0 8px white);
-}
+h1 {
+    color: #0759a8;
 
-.hero h1{
-    font-size:clamp(28px,6vw,52px);
-    color:#0759a8;
+    font-size: clamp(28px, 6vw, 52px);
+
     text-shadow:
         3px 3px white,
-        5px 5px #e32943;
-    margin-bottom:20px;
+        5px 5px #e32b44;
+
+    margin-bottom: 20px;
 }
 
-.hero p{
-    font-size:15px;
-    line-height:1.8;
-    color:#174d7d;
+.subtitle {
+    color: #174d7d;
+
+    font-size: 15px;
+    line-height: 1.9;
+
+    margin-bottom: 25px;
 }
 
-.main-button{
-    margin-top:25px;
-    padding:15px 25px;
-    border:3px solid white;
-    border-radius:30px;
-    color:white;
-    background:linear-gradient(135deg,#1689e8,#0755a5);
+/* =========================
+   BUTTON
+========================= */
+
+.next-button {
+    padding: 14px 24px;
+
+    border: 3px solid white;
+    border-radius: 30px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1589e8,
+            #0754a4
+        );
+
     box-shadow:
-        inset 0 3px 5px #ffffffaa,
+        inset 0 3px 5px rgba(255,255,255,.6),
         0 5px 0 #08487f,
-        0 0 20px #ffffff;
-    font-size:14px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.25s;
+        0 0 20px rgba(255,255,255,.8);
+
+    font-weight: bold;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: .25s;
 }
 
-.main-button:hover{
-    transform:translateY(-4px) scale(1.04);
-    background:linear-gradient(135deg,#e42b45,#b91631);
+.next-button:hover {
+    transform: translateY(-4px) scale(1.04);
+
+    background:
+        linear-gradient(
+            135deg,
+            #e72b45,
+            #b91832
+        );
 }
 
-/* CONTENT */
-.content{
-    padding:20px;
+/* =========================
+   PHOTOS
+========================= */
+
+.photo-frame {
+    width: min(380px, 85vw);
+    margin: 0 auto 25px;
+
+    padding: 12px;
+
+    background: white;
+
+    border: 3px solid #55a9df;
+
+    box-shadow:
+        7px 8px 0 #3d8dc4,
+        0 0 25px rgba(255,255,255,.7);
+
+    transform: rotate(-1deg);
+
+    transition: .3s;
 }
 
-.card{
-    margin-bottom:20px;
-    background:rgba(255,255,255,.78);
-    border:3px solid white;
-    border-radius:12px;
-    box-shadow:5px 6px 0 #438fc4;
-    overflow:hidden;
+.photo-frame:hover {
+    transform:
+        rotate(1deg)
+        scale(1.02);
 }
 
-.card-title{
-    padding:12px 15px;
-    color:white;
-    background:linear-gradient(90deg,#167aca,#55b9f4);
-    font-weight:bold;
+.photo-frame img {
+    width: 100%;
+    max-height: 430px;
+
+    object-fit: cover;
+
+    display: block;
+
+    border: 2px solid #a8d9f5;
 }
 
-.card-body{
-    padding:25px;
+.photo-caption {
+    padding: 16px 8px 8px;
+
+    color: #0759a8;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    line-height: 1.6;
 }
 
-/* ENVELOPE */
-.envelope{
-    width:230px;
-    height:150px;
-    margin:10px auto 20px;
-    position:relative;
-    background:#f4fbff;
-    border:4px solid #378fd1;
-    box-shadow:6px 7px 0 #2b72a9;
-    cursor:pointer;
-    transition:.3s;
+.photo-note {
+    color: #4b7193;
+    font-size: 12px;
+
+    margin-bottom: 22px;
 }
 
-.envelope:hover{
-    transform:rotate(-3deg) scale(1.05);
+/* =========================
+   LETTER
+========================= */
+
+.letter-paper {
+    width: min(650px, 90vw);
+
+    margin: auto;
+
+    padding: 35px;
+
+    text-align: left;
+
+    color: #123e69;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.96),
+            rgba(241,250,255,.96)
+        );
+
+    border: 3px solid #78bce7;
+
+    box-shadow:
+        7px 8px 0 #438fc4;
+
+    line-height: 1.9;
+
+    font-size: 15px;
 }
 
-.envelope:before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(145deg,transparent 49%,#8bc9ed 50%,transparent 52%);
+.letter-paper h2 {
+    text-align: center;
+
+    color: #0759a8;
+
+    margin-bottom: 25px;
+
+    font-size: 23px;
 }
 
-.heart{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    font-size:42px;
-    color:#e52642;
-    text-shadow:0 0 10px #ff8c9b;
-    z-index:2;
+.letter-paper p {
+    margin-bottom: 18px;
 }
 
-/* LETTER */
-.letter{
-    background:#fff;
-    border:2px solid #79bce7;
-    padding:25px;
-    line-height:1.9;
-    font-size:15px;
-    border-radius:8px;
+.signature {
+    text-align: right;
+
+    color: #e32943;
+
+    font-weight: bold;
 }
 
-.letter p{
-    margin-bottom:18px;
+/* =========================
+   FINAL
+========================= */
+
+.final-heart {
+    font-size: 80px;
+
+    color: #e72a43;
+
+    text-shadow:
+        0 0 10px #ff7b8d,
+        0 0 25px #ff3853;
+
+    animation: heartbeat 1.5s infinite;
 }
 
-.hidden{
-    display:none;
-}
-
-.show{
-    display:block;
-    animation:appear .7s ease;
-}
-
-@keyframes appear{
-    from{
-        opacity:0;
-        transform:translateY(15px);
+@keyframes heartbeat {
+    50% {
+        transform: scale(1.12);
     }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
 }
 
-/* MEMORIES */
-.memories{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
+.final-title {
+    color: #0759a8;
+
+    font-size: clamp(24px, 5vw, 40px);
+
+    margin: 20px 0;
+
+    text-shadow:
+        2px 2px white;
 }
 
-.photo{
-    min-height:170px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    color:#1262a5;
-    background:linear-gradient(135deg,#fff,#bce7ff);
-    border:8px solid white;
-    box-shadow:3px 5px 0 #579aca;
-    font-size:30px;
+.final-text {
+    max-width: 580px;
+    margin: 0 auto 25px;
+
+    color: #174d7d;
+
+    line-height: 1.9;
 }
 
-.photo small{
-    display:block;
-    font-size:11px;
+/* =========================
+   MUSIC
+========================= */
+
+.music-control {
+    position: fixed;
+
+    right: 18px;
+    bottom: 18px;
+
+    z-index: 10;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    border: 3px solid white;
+
+    background: #0873c9;
+
+    color: white;
+
+    box-shadow:
+        0 4px 0 #064d89,
+        0 0 15px rgba(255,255,255,.8);
+
+    cursor: pointer;
+
+    font-size: 18px;
 }
 
-/* FOOTER */
-footer{
-    text-align:center;
-    padding:25px;
-    color:white;
-    background:linear-gradient(#167aca,#07529b);
-    font-size:12px;
-}
+/* =========================
+   MOBILE
+========================= */
 
-/* RESPONSIVE */
-@media(max-width:650px){
+@media(max-width:600px) {
 
-    .window{
-        margin:20px auto;
+    .slide {
+        padding: 15px;
     }
 
-    .hero{
-        padding:45px 15px;
+    .window {
+        width: 96vw;
+        max-height: 94vh;
     }
 
-    .hero h1{
-        font-size:30px;
+    .content {
+        padding: 28px 18px;
     }
 
-    .hero p{
-        font-size:12px;
+    .subtitle {
+        font-size: 12px;
     }
 
-    .memories{
-        grid-template-columns:1fr;
+    .photo-frame {
+        width: 90%;
     }
 
-    .photo{
-        min-height:140px;
+    .letter-paper {
+        padding: 22px;
+
+        font-size: 13px;
     }
 
-    .card-body{
-        padding:18px;
+    .letter-paper h2 {
+        font-size: 19px;
     }
 
-    nav a{
-        font-size:9px;
-        padding:7px 9px;
+    .final-heart {
+        font-size: 65px;
+    }
+
+    .music-control {
+        width: 42px;
+        height: 42px;
+        right: 12px;
+        bottom: 12px;
     }
 }
 </style>
 </head>
 
+
 <body>
 
+<!-- Dekorasi -->
+
 <div class="sparkle s1">✦</div>
-<div class="sparkle s2">♡</div>
-<div class="sparkle s3">✧</div>
+<div class="sparkle s2">✧</div>
+<div class="sparkle s3">♡</div>
 <div class="sparkle s4">♥</div>
 
-<div class="window">
 
-    <div class="titlebar">
-        <div class="title">♡ for-you.exe</div>
+<!-- MUSIK -->
 
-        <div class="buttons">
-            <span>−</span>
-            <span>□</span>
-            <span>×</span>
+<audio id="birthdayMusic" loop>
+    <source src="music/birthday.mp3" type="audio/mpeg">
+</audio>
+
+<button
+    class="music-control"
+    id="musicButton"
+    onclick="toggleMusic()"
+>
+    🎵
+</button>
+
+
+<div class="slideshow">
+
+
+<!-- =========================
+     SLIDE 1 — OPENING
+========================= -->
+
+<section class="slide active">
+
+    <div class="window">
+
+        <div class="titlebar">
+
+            <div class="window-title">
+                ♡ for-you.exe
+            </div>
+
+            <div class="window-buttons">
+                <span>−</span>
+                <span>□</span>
+                <span>×</span>
+            </div>
+
         </div>
+
+
+        <div class="content">
+
+            <div class="moon">
+                🌙
+            </div>
+
+            <h1>
+                Hai Sayang ❤️
+            </h1>
+
+            <p class="subtitle">
+                Aku punya sesuatu khusus buat kamu...<br>
+                Jadi, buka pelan-pelan yaa ♡
+            </p>
+
+            <button
+                class="next-button"
+                onclick="nextSlide()"
+            >
+                💌 Buka Hadiahnya
+            </button>
+
+        </div>
+
     </div>
 
-    <nav>
-        <a href="#home">HOME</a>
-        <a href="#story">OUR STORY</a>
-        <a href="#letter">THE LETTER</a>
-        <a href="#memories">MEMORIES</a>
-        <a href="#forever">FOR YOU</a>
-    </nav>
+</section>
 
-    <section class="hero" id="home">
 
-        <div class="moon">🌙</div>
+<!-- =========================
+     SLIDE 2 — FOTO 1
+========================= -->
 
-        <h1>Hai Sayang ❤️</h1>
+<section class="slide">
 
-        <p>
-            Aku bikin sesuatu khusus buat kamu...<br>
-            Jadi, buka pelan-pelan yaa ♡
-        </p>
+    <div class="window">
 
-        <button class="main-button" onclick="openLetter()">
-            💌 Buka Suratnya
-        </button>
+        <div class="titlebar">
 
-    </section>
-
-    <div class="content">
-
-        <section class="card" id="story">
-
-            <div class="card-title">
-                💿 01 — OUR LITTLE STORY
+            <div class="window-title">
+                ♡ sebuah foto
             </div>
 
-            <div class="card-body">
-
-                <div class="envelope" onclick="openLetter()">
-                    <div class="heart">♥</div>
-                </div>
-
-                <p style="text-align:center">
-                    ✦ klik amplopnya ✦
-                </p>
-
+            <div class="window-buttons">
+                <span>−</span>
+                <span>□</span>
+                <span>×</span>
             </div>
 
-        </section>
+        </div>
 
 
-        <section class="card" id="letter">
+        <div class="content">
 
-            <div class="card-title">
-                💌 02 — A LETTER FOR YOU
-            </div>
+            <div class="photo-frame">
 
-            <div class="card-body">
+                <img
+                    src="images/foto1.jpg"
+                    alt="Foto pertama"
+                >
 
-                <div class="letter">
-
-                    <p>Hai kamu, ♡</p>
-
-                    <p>
-                        Walaupun jarak kita sejauh ini,
-                        kamu tetap jadi salah satu orang
-                        yang paling dekat di hati aku.
-                    </p>
-
-                    <p>
-                        Aku harap surat kecil ini bisa bikin
-                        kamu ingat kalau sejauh apa pun
-                        jarak kita, rasa sayang aku bakal tetap sama.
-                    </p>
-
-                    <p>
-                        Terima kasih sudah tetap ada dan
-                        menjadi bagian dari hidup aku. ♡
-                    </p>
-
-                    <p>
-                        Semoga kita selalu punya alasan
-                        untuk tetap bertahan dan saling memilih.
-                    </p>
-
-                    <p style="text-align:right">
-                        — Dari aku, untuk kamu ❤️
-                    </p>
-
+                <div class="photo-caption">
+                    pap pertama kali dari kamu
                 </div>
 
             </div>
 
-        </section>
+            <p class="photo-note">
+                ♡ salah satu hal kecil yang masih aku ingat sampai sekarang
+            </p>
+
+            <button
+                class="next-button"
+                onclick="nextSlide()"
+            >
+                Lanjut ♡
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
 
 
-        <section class="card" id="memories">
+<!-- =========================
+     SLIDE 3 — FOTO 2
+========================= -->
 
-            <div class="card-title">
-                📸 03 — OUR MEMORIES
+<section class="slide">
+
+    <div class="window">
+
+        <div class="titlebar">
+
+            <div class="window-title">
+                ♡ favorite picture
             </div>
 
-            <div class="card-body">
+            <div class="window-buttons">
+                <span>−</span>
+                <span>□</span>
+                <span>×</span>
+            </div>
 
-                <div class="memories">
+        </div>
 
-                    <div class="photo">
-                        <div>
-                            📷<br>
-                            <small>Foto kita</small>
-                        </div>
-                    </div>
 
-                    <div class="photo">
-                        <div>
-                            💕<br>
-                            <small>Memory kita</small>
-                        </div>
-                    </div>
+        <div class="content">
 
-                    <div class="photo">
-                        <div>
-                            ⭐<br>
-                            <small>Moment favorit</small>
-                        </div>
-                    </div>
+            <div class="photo-frame">
 
+                <img
+                    src="images/foto2.jpg"
+                    alt="Foto kedua"
+                >
+
+                <div class="photo-caption">
+                    ini pap kamu yang paling aku suka
                 </div>
 
             </div>
 
-        </section>
+            <p class="photo-note">
+                ♡ entah kenapa, tapi aku suka banget foto ini
+            </p>
+
+            <button
+                class="next-button"
+                onclick="nextSlide()"
+            >
+                Lanjut ♡
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
 
 
-        <section class="card" id="forever">
+<!-- =========================
+     SLIDE 4 — SURAT
+========================= -->
 
-            <div class="card-title">
-                ❤️ 04 — FOR YOU
+<section class="slide">
+
+    <div class="window">
+
+        <div class="titlebar">
+
+            <div class="window-title">
+                ♡ surat untuk kamu
             </div>
 
-            <div class="card-body" style="text-align:center;padding:45px 20px">
+            <div class="window-buttons">
+                <span>−</span>
+                <span>□</span>
+                <span>×</span>
+            </div>
 
-                <div style="font-size:70px">
-                    ❤️
-                </div>
+        </div>
 
-                <h2 style="color:#0759a8;margin:20px 0">
-                    Sejauh apa pun jaraknya...
+
+        <div class="content">
+
+            <div class="letter-paper">
+
+                <h2>
+                    Untuk kamu yang spesial ♡
                 </h2>
 
-                <p style="line-height:2">
-                    aku tetap memilih kamu. ♡
+
+                <!--
+                GANTI ISI SURAT DI BAWAH INI
+                SESUKA KAMU.
+                -->
+
+                <p>
+                    Tulis surat kamu di sini...
                 </p>
 
-                <br>
+                <p>
+                    Kamu bisa bikin suratnya sepanjang
+                    apa pun yang kamu mau.
+                </p>
 
-                <button class="main-button" onclick="showMessage()">
-                    klik kalau kamu sayang aku ♡
-                </button>
+                <p>
+                    Semua tulisan di bagian ini bebas kamu ubah.
+                </p>
+
+                <p class="signature">
+                    — dari aku ❤️
+                </p>
 
             </div>
 
-        </section>
+
+            <br>
+
+
+            <button
+                class="next-button"
+                onclick="nextSlide()"
+            >
+                Masih ada satu lagi ♡
+            </button>
+
+        </div>
 
     </div>
 
-    <footer>
-        made with all my love, just for you ♡
-    </footer>
+</section>
+
+
+<!-- =========================
+     SLIDE 5 — ENDING
+========================= -->
+
+<section class="slide">
+
+    <div class="window">
+
+        <div class="titlebar">
+
+            <div class="window-title">
+                ♡ for you
+            </div>
+
+            <div class="window-buttons">
+                <span>−</span>
+                <span>□</span>
+                <span>×</span>
+            </div>
+
+        </div>
+
+
+        <div class="content">
+
+            <div class="final-heart">
+                ♥
+            </div>
+
+
+            <h2 class="final-title">
+                Selamat Ulang Tahun! 🎂
+            </h2>
+
+
+            <!--
+            GANTI TEKS INI SESUKA KAMU
+            -->
+
+            <p class="final-text">
+                Semoga di umur kamu yang baru,
+                semua hal baik datang satu per satu.
+                Semoga kamu selalu bahagia,
+                sehat, dan dikelilingi orang-orang
+                yang sayang sama kamu. ❤️
+            </p>
+
+
+            <!--
+            TOMBOL INI JUGA BEBAS KAMU UBAH
+            TULISANNYA.
+            -->
+
+            <button
+                class="next-button"
+                onclick="finalMessage()"
+            >
+                Aku sayang kamu ♡
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 </div>
 
 
 <script>
 
-function openLetter(){
+/* =========================
+   SLIDESHOW
+========================= */
 
-    const letter = document.getElementById("letter");
+let currentSlide = 0;
 
-    letter.classList.remove("hidden");
-    letter.classList.add("show");
+const slides =
+    document.querySelectorAll(".slide");
 
-    letter.scrollIntoView({
-        behavior:"smooth",
-        block:"center"
+
+function nextSlide() {
+
+    slides[currentSlide]
+        .classList.remove("active");
+
+    currentSlide++;
+
+    if(currentSlide >= slides.length) {
+        currentSlide = slides.length - 1;
+    }
+
+    slides[currentSlide]
+        .classList.add("active");
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
     });
 
-    createHearts();
-}
 
+    /* Musik mulai setelah tombol opening ditekan */
 
-function showMessage(){
+    if(currentSlide === 1) {
 
-    alert("Makasih sudah sampai sejauh ini sama aku. Aku sayang kamu ❤️");
+        const music =
+            document.getElementById("birthdayMusic");
 
-}
+        music.play().catch(() => {});
 
-
-function createHearts(){
-
-    for(let i=0;i<12;i++){
-
-        const heart=document.createElement("div");
-
-        heart.innerHTML="♥";
-
-        heart.style.position="fixed";
-        heart.style.left=Math.random()*100+"vw";
-        heart.style.bottom="-30px";
-        heart.style.color="#e52642";
-        heart.style.fontSize=(15+Math.random()*20)+"px";
-        heart.style.zIndex="999";
-        heart.style.pointerEvents="none";
-
-        document.body.appendChild(heart);
-
-        heart.animate(
-            [
-                {transform:"translateY(0)",opacity:1},
-                {transform:"translateY(-110vh)",opacity:0}
-            ],
-            {
-                duration:3500+Math.random()*2500,
-                easing:"linear"
-            }
-        );
-
-        setTimeout(()=>{
-            heart.remove();
-        },6000);
+        document.getElementById("musicButton")
+            .textContent = "🔊";
     }
+
+}
+
+
+/* =========================
+   MUSIC
+========================= */
+
+let musicPlaying = false;
+
+
+function toggleMusic() {
+
+    const music =
+        document.getElementById("birthdayMusic");
+
+    const button =
+        document.getElementById("musicButton");
+
+
+    if(music.paused) {
+
+        music.play();
+
+        button.textContent = "🔊";
+
+        musicPlaying = true;
+
+    } else {
+
+        music.pause();
+
+        button.textContent = "🔇";
+
+        musicPlaying = false;
+
+    }
+
+}
+
+
+/* =========================
+   FINAL BUTTON
+========================= */
+
+function finalMessage() {
+
+    createHearts();
+
+    alert(
+        "Makasih sudah sampai di akhir. ❤️"
+    );
+
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+function createHearts() {
+
+    for(let i = 0; i < 15; i++) {
+
+        setTimeout(() => {
+
+            const heart =
+                document.createElement("div");
+
+            heart.innerHTML =
+                Math.random() > .4
+                ? "♥"
+                : "♡";
+
+            heart.style.position = "fixed";
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.bottom =
+                "-30px";
+
+            heart.style.color =
+                "#e52a43";
+
+            heart.style.fontSize =
+                (15 + Math.random() * 25) + "px";
+
+            heart.style.zIndex = "100";
+
+            heart.style.pointerEvents =
+                "none";
+
+
+            document.body.appendChild(heart);
+
+
+            heart.animate(
+                [
+                    {
+                        transform:
+                            "translateY(0) rotate(0)",
+                        opacity: 1
+                    },
+
+                    {
+                        transform:
+                            "translateY(-110vh) rotate(30deg)",
+                        opacity: 0
+                    }
+                ],
+                {
+                    duration:
+                        3500 + Math.random() * 2500,
+
+                    easing: "linear"
+                }
+            );
+
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6500);
+
+
+        }, i * 120);
+
+    }
+
 }
 
 </script>
