@@ -3,231 +3,597 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Selamat Ulang Tahun! 💗</title>
+<title>For You ♡</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial,sans-serif;
+    color:#082b63;
+    background:
+        radial-gradient(circle at 10% 20%,#ffffff 0 3px,transparent 4px),
+        radial-gradient(circle at 80% 15%,#ffffff 0 2px,transparent 3px),
+        radial-gradient(circle at 60% 80%,#ffffff 0 3px,transparent 4px),
+        linear-gradient(135deg,#79c9ff,#dff5ff,#4da9ed);
+    background-size:120px 120px,170px 150px,200px 180px,100% 100%;
+    overflow-x:hidden;
+}
+
+/* Y2K sparkle */
+.sparkle{
+    position:fixed;
+    color:white;
+    font-size:20px;
+    animation:float 5s infinite ease-in-out;
+    pointer-events:none;
+}
+
+.s1{left:8%;top:15%}
+.s2{right:12%;top:30%;animation-delay:1s}
+.s3{left:20%;bottom:15%;animation-delay:2s}
+.s4{right:25%;bottom:10%;animation-delay:3s}
+
+@keyframes float{
+    50%{
+        transform:translateY(-18px) rotate(15deg);
+        opacity:.5;
+    }
+}
+
+/* MAIN WINDOW */
+.window{
+    width:92%;
+    max-width:950px;
+    margin:35px auto;
+    background:rgba(235,249,255,.82);
+    border:3px solid white;
+    border-radius:14px;
+    box-shadow:
+        0 0 0 3px #1675c8,
+        10px 12px 0 rgba(4,52,105,.25),
+        0 0 40px rgba(255,255,255,.8);
+    overflow:hidden;
+}
+
+/* TITLE BAR */
+.titlebar{
+    background:linear-gradient(#69c7ff,#1472c9);
+    color:white;
+    padding:11px 14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:3px solid white;
+    font-weight:bold;
+}
+
+.title{
+    text-shadow:2px 2px #145596;
+}
+
+.buttons{
+    display:flex;
+    gap:5px;
+}
+
+.buttons span{
+    width:23px;
+    height:21px;
+    display:grid;
+    place-items:center;
+    background:#dff5ff;
+    color:#1765a9;
+    border:2px solid white;
+    font-size:12px;
+}
+
+.buttons span:last-child{
+    background:#e52d43;
+    color:white;
+}
+
+/* NAVIGATION */
+nav{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:12px;
+    background:#c9edff;
+    border-bottom:2px solid #5aafe9;
+}
+
+nav a{
+    color:#07559d;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:12px;
+    padding:8px 13px;
+    border:2px solid white;
+    border-radius:20px;
+    background:linear-gradient(#fff,#a9dcfa);
+    box-shadow:2px 3px 0 #4a98cf;
+}
+
+nav a:hover{
+    color:#e2263e;
+    transform:translateY(-2px);
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:65px 20px 55px;
+    background:
+        linear-gradient(rgba(255,255,255,.2),rgba(255,255,255,.2)),
+        radial-gradient(circle at 50% 30%,#ffffffaa,transparent 35%);
+}
+
+.moon{
+    font-size:55px;
+    margin-bottom:10px;
+    filter:drop-shadow(0 0 8px white);
+}
+
+.hero h1{
+    font-size:clamp(28px,6vw,52px);
+    color:#0759a8;
+    text-shadow:
+        3px 3px white,
+        5px 5px #e32943;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:15px;
+    line-height:1.8;
+    color:#174d7d;
+}
+
+.main-button{
+    margin-top:25px;
+    padding:15px 25px;
+    border:3px solid white;
+    border-radius:30px;
+    color:white;
+    background:linear-gradient(135deg,#1689e8,#0755a5);
+    box-shadow:
+        inset 0 3px 5px #ffffffaa,
+        0 5px 0 #08487f,
+        0 0 20px #ffffff;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.main-button:hover{
+    transform:translateY(-4px) scale(1.04);
+    background:linear-gradient(135deg,#e42b45,#b91631);
+}
+
+/* CONTENT */
+.content{
+    padding:20px;
+}
+
+.card{
+    margin-bottom:20px;
+    background:rgba(255,255,255,.78);
+    border:3px solid white;
+    border-radius:12px;
+    box-shadow:5px 6px 0 #438fc4;
+    overflow:hidden;
+}
+
+.card-title{
+    padding:12px 15px;
+    color:white;
+    background:linear-gradient(90deg,#167aca,#55b9f4);
+    font-weight:bold;
+}
+
+.card-body{
+    padding:25px;
+}
+
+/* ENVELOPE */
+.envelope{
+    width:230px;
+    height:150px;
+    margin:10px auto 20px;
+    position:relative;
+    background:#f4fbff;
+    border:4px solid #378fd1;
+    box-shadow:6px 7px 0 #2b72a9;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.envelope:hover{
+    transform:rotate(-3deg) scale(1.05);
+}
+
+.envelope:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(145deg,transparent 49%,#8bc9ed 50%,transparent 52%);
+}
+
+.heart{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    font-size:42px;
+    color:#e52642;
+    text-shadow:0 0 10px #ff8c9b;
+    z-index:2;
+}
+
+/* LETTER */
+.letter{
+    background:#fff;
+    border:2px solid #79bce7;
+    padding:25px;
+    line-height:1.9;
+    font-size:15px;
+    border-radius:8px;
+}
+
+.letter p{
+    margin-bottom:18px;
+}
+
+.hidden{
+    display:none;
+}
+
+.show{
+    display:block;
+    animation:appear .7s ease;
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* MEMORIES */
+.memories{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.photo{
+    min-height:170px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:#1262a5;
+    background:linear-gradient(135deg,#fff,#bce7ff);
+    border:8px solid white;
+    box-shadow:3px 5px 0 #579aca;
+    font-size:30px;
+}
+
+.photo small{
+    display:block;
+    font-size:11px;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:25px;
+    color:white;
+    background:linear-gradient(#167aca,#07529b);
+    font-size:12px;
+}
+
+/* RESPONSIVE */
+@media(max-width:650px){
+
+    .window{
+        margin:20px auto;
     }
 
-    body {
-        min-height: 100vh;
-        font-family: "Georgia", serif;
-        background: linear-gradient(135deg, #ffe4ec, #fff4f7, #f8dce8);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow-x: hidden;
-        color: #633b48;
+    .hero{
+        padding:45px 15px;
     }
 
-    /* Hati yang melayang */
-    .heart {
-        position: fixed;
-        bottom: -30px;
-        font-size: 20px;
-        animation: float 7s linear infinite;
-        opacity: 0.7;
-        pointer-events: none;
+    .hero h1{
+        font-size:30px;
     }
 
-    .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
-    .heart:nth-child(2) { left: 30%; animation-delay: 2s; }
-    .heart:nth-child(3) { left: 55%; animation-delay: 4s; }
-    .heart:nth-child(4) { left: 80%; animation-delay: 1s; }
-
-    @keyframes float {
-        0% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 0;
-        }
-        20% {
-            opacity: 0.8;
-        }
-        100% {
-            transform: translateY(-110vh) rotate(25deg);
-            opacity: 0;
-        }
+    .hero p{
+        font-size:12px;
     }
 
-    .container {
-        width: 90%;
-        max-width: 650px;
-        text-align: center;
-        padding: 45px 30px;
-        background: rgba(255,255,255,0.72);
-        border: 1px solid rgba(255,255,255,0.8);
-        border-radius: 30px;
-        box-shadow: 0 20px 60px rgba(130, 65, 90, 0.18);
-        backdrop-filter: blur(10px);
-        animation: appear 1s ease;
+    .memories{
+        grid-template-columns:1fr;
     }
 
-    @keyframes appear {
-        from {
-            opacity: 0;
-            transform: translateY(25px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .photo{
+        min-height:140px;
     }
 
-    .emoji {
-        font-size: 55px;
-        margin-bottom: 15px;
-        animation: bounce 2s infinite;
+    .card-body{
+        padding:18px;
     }
 
-    @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-8px); }
+    nav a{
+        font-size:9px;
+        padding:7px 9px;
     }
-
-    h1 {
-        font-size: 38px;
-        color: #9b526c;
-        margin-bottom: 12px;
-    }
-
-    .subtitle {
-        font-family: Arial, sans-serif;
-        font-size: 16px;
-        color: #815866;
-        margin-bottom: 30px;
-    }
-
-    button {
-        border: none;
-        background: linear-gradient(135deg, #d97898, #b95779);
-        color: white;
-        padding: 14px 28px;
-        border-radius: 30px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        box-shadow: 0 8px 20px rgba(185, 87, 121, 0.3);
-        transition: 0.3s;
-    }
-
-    button:hover {
-        transform: translateY(-3px) scale(1.03);
-        box-shadow: 0 12px 25px rgba(185, 87, 121, 0.4);
-    }
-
-    #letter {
-        display: none;
-        margin-top: 35px;
-        padding: 30px 25px;
-        background: #fffafc;
-        border-radius: 20px;
-        text-align: left;
-        box-shadow: inset 0 0 20px rgba(170, 90, 120, 0.08);
-        animation: letterAppear 0.8s ease;
-    }
-
-    @keyframes letterAppear {
-        from {
-            opacity: 0;
-            transform: scale(0.95);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-
-    #letter h2 {
-        text-align: center;
-        color: #a75572;
-        margin-bottom: 25px;
-        font-size: 25px;
-    }
-
-    #letter p {
-        font-family: Arial, sans-serif;
-        line-height: 1.8;
-        margin-bottom: 18px;
-        color: #654651;
-    }
-
-    .closing {
-        text-align: right;
-        font-family: "Georgia", serif !important;
-        font-style: italic;
-        color: #9b526c !important;
-    }
-
-    .sparkle {
-        font-size: 18px;
-    }
+}
 </style>
 </head>
 
 <body>
 
-<!-- Hati melayang -->
-<div class="heart">💗</div>
-<div class="heart">💕</div>
-<div class="heart">💖</div>
-<div class="heart">💗</div>
+<div class="sparkle s1">✦</div>
+<div class="sparkle s2">♡</div>
+<div class="sparkle s3">✧</div>
+<div class="sparkle s4">♥</div>
 
-<div class="container">
+<div class="window">
 
-    <div class="emoji">💌</div>
+    <div class="titlebar">
+        <div class="title">♡ for-you.exe</div>
 
-    <h1>Haii Sayangg 💗</h1>
+        <div class="buttons">
+            <span>−</span>
+            <span>□</span>
+            <span>×</span>
+        </div>
+    </div>
 
-    <p class="subtitle">
-        Aku bikin sesuatu khusus buat kamu...
-    </p>
+    <nav>
+        <a href="#home">HOME</a>
+        <a href="#story">OUR STORY</a>
+        <a href="#letter">THE LETTER</a>
+        <a href="#memories">MEMORIES</a>
+        <a href="#forever">FOR YOU</a>
+    </nav>
 
-    <button onclick="openLetter()">
-        Buka Suratnyaa 💌
-    </button>
+    <section class="hero" id="home">
 
-    <div id="letter">
+        <div class="moon">🌙</div>
 
-        <h2>Untuk kesayangan aku ♡</h2>
-
-        <p>
-            Walaupun jarak kita sejauh ini,
-            kamu tetap jadi salah satu orang yang paling dekat di hati aku.
-        </p>
-
-        <p>
-            Aku harap surat kecil ini bisa bikin kamu ingat
-            kalau sejauh apa pun jarak kita, rasa sayang aku bakal tetap sama.
-        </p>
+        <h1>Hai Sayang ❤️</h1>
 
         <p>
-            Terima kasih sudah tetap ada dan menjadi bagian dari hidup aku. ♡
+            Aku bikin sesuatu khusus buat kamu...<br>
+            Jadi, buka pelan-pelan yaa ♡
         </p>
 
-        <p class="closing">
-            Dari aku, untuk kamu ♡
-        </p>
+        <button class="main-button" onclick="openLetter()">
+            💌 Buka Suratnya
+        </button>
+
+    </section>
+
+    <div class="content">
+
+        <section class="card" id="story">
+
+            <div class="card-title">
+                💿 01 — OUR LITTLE STORY
+            </div>
+
+            <div class="card-body">
+
+                <div class="envelope" onclick="openLetter()">
+                    <div class="heart">♥</div>
+                </div>
+
+                <p style="text-align:center">
+                    ✦ klik amplopnya ✦
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="card" id="letter">
+
+            <div class="card-title">
+                💌 02 — A LETTER FOR YOU
+            </div>
+
+            <div class="card-body">
+
+                <div class="letter">
+
+                    <p>Hai kamu, ♡</p>
+
+                    <p>
+                        Walaupun jarak kita sejauh ini,
+                        kamu tetap jadi salah satu orang
+                        yang paling dekat di hati aku.
+                    </p>
+
+                    <p>
+                        Aku harap surat kecil ini bisa bikin
+                        kamu ingat kalau sejauh apa pun
+                        jarak kita, rasa sayang aku bakal tetap sama.
+                    </p>
+
+                    <p>
+                        Terima kasih sudah tetap ada dan
+                        menjadi bagian dari hidup aku. ♡
+                    </p>
+
+                    <p>
+                        Semoga kita selalu punya alasan
+                        untuk tetap bertahan dan saling memilih.
+                    </p>
+
+                    <p style="text-align:right">
+                        — Dari aku, untuk kamu ❤️
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="card" id="memories">
+
+            <div class="card-title">
+                📸 03 — OUR MEMORIES
+            </div>
+
+            <div class="card-body">
+
+                <div class="memories">
+
+                    <div class="photo">
+                        <div>
+                            📷<br>
+                            <small>Foto kita</small>
+                        </div>
+                    </div>
+
+                    <div class="photo">
+                        <div>
+                            💕<br>
+                            <small>Memory kita</small>
+                        </div>
+                    </div>
+
+                    <div class="photo">
+                        <div>
+                            ⭐<br>
+                            <small>Moment favorit</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="card" id="forever">
+
+            <div class="card-title">
+                ❤️ 04 — FOR YOU
+            </div>
+
+            <div class="card-body" style="text-align:center;padding:45px 20px">
+
+                <div style="font-size:70px">
+                    ❤️
+                </div>
+
+                <h2 style="color:#0759a8;margin:20px 0">
+                    Sejauh apa pun jaraknya...
+                </h2>
+
+                <p style="line-height:2">
+                    aku tetap memilih kamu. ♡
+                </p>
+
+                <br>
+
+                <button class="main-button" onclick="showMessage()">
+                    klik kalau kamu sayang aku ♡
+                </button>
+
+            </div>
+
+        </section>
 
     </div>
 
+    <footer>
+        made with all my love, just for you ♡
+    </footer>
+
 </div>
 
+
 <script>
-function openLetter() {
+
+function openLetter(){
+
     const letter = document.getElementById("letter");
 
-    letter.style.display = "block";
+    letter.classList.remove("hidden");
+    letter.classList.add("show");
 
-    setTimeout(() => {
-        letter.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-    }, 100);
+    letter.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+    });
+
+    createHearts();
 }
+
+
+function showMessage(){
+
+    alert("Makasih sudah sampai sejauh ini sama aku. Aku sayang kamu ❤️");
+
+}
+
+
+function createHearts(){
+
+    for(let i=0;i<12;i++){
+
+        const heart=document.createElement("div");
+
+        heart.innerHTML="♥";
+
+        heart.style.position="fixed";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.bottom="-30px";
+        heart.style.color="#e52642";
+        heart.style.fontSize=(15+Math.random()*20)+"px";
+        heart.style.zIndex="999";
+        heart.style.pointerEvents="none";
+
+        document.body.appendChild(heart);
+
+        heart.animate(
+            [
+                {transform:"translateY(0)",opacity:1},
+                {transform:"translateY(-110vh)",opacity:0}
+            ],
+            {
+                duration:3500+Math.random()*2500,
+                easing:"linear"
+            }
+        );
+
+        setTimeout(()=>{
+            heart.remove();
+        },6000);
+    }
+}
+
 </script>
 
 </body>
