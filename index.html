@@ -498,6 +498,55 @@ h1 {
         bottom: 12px;
     }
 }
+    /* Y2K BLUE + RED */
+
+body {
+    background:
+        radial-gradient(circle at 10% 85%, rgba(235,35,60,.28), transparent 25%),
+        radial-gradient(circle at 90% 15%, rgba(235,35,60,.22), transparent 25%),
+        linear-gradient(135deg, #48aff5, #dff7ff, #197bc9);
+}
+
+body::before {
+    content: "♥   ✦   ♥   ✧   ♥   ✦   ♥";
+    position: fixed;
+    inset: -100px 0 0 0;
+    color: rgba(235,35,60,.65);
+    font-size: 18px;
+    letter-spacing: 35px;
+    line-height: 100px;
+    animation: fallingHearts 10s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes fallingHearts {
+    from {
+        transform: translateY(-100px);
+    }
+    to {
+        transform: translateY(110vh);
+    }
+}
+
+.window {
+    box-shadow:
+        0 0 0 3px #126fc0,
+        0 0 0 5px rgba(235,35,60,.2),
+        10px 12px 0 rgba(5,50,100,.25),
+        0 0 35px rgba(255,255,255,.8);
+}
+
+.final-heart {
+    color: #ed3049;
+    text-shadow:
+        0 0 10px #ff7185,
+        0 0 25px #ed3049;
+}
+
+.next-button:hover {
+    background: linear-gradient(135deg, #f0445b, #c51e38);
+}
 </style>
 </head>
 
