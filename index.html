@@ -498,280 +498,251 @@ h1 {
         bottom: 12px;
     }
 }
-   /* =========================================
-   💿 Y2K MAXIMALIST BACKGROUND 💿
-========================================= */
+    /* =================================
+   💿 Y2K BACKGROUND — BLUE + RED
+================================= */
 
 body {
     background:
-        radial-gradient(circle at 8% 15%, rgba(255,255,255,.7), transparent 8%),
-        radial-gradient(circle at 92% 20%, rgba(239,45,70,.28), transparent 18%),
-        radial-gradient(circle at 12% 85%, rgba(239,45,70,.3), transparent 20%),
-        radial-gradient(circle at 85% 85%, rgba(255,255,255,.55), transparent 10%),
-        linear-gradient(
-            135deg,
-            #167bc7 0%,
-            #58baf5 25%,
-            #d9f5ff 48%,
-            #63c1f5 70%,
-            #126bb5 100%
-        );
+        radial-gradient(circle at 8% 15%, rgba(255,255,255,.45), transparent 10%),
+        radial-gradient(circle at 92% 18%, rgba(235,35,60,.22), transparent 18%),
+        radial-gradient(circle at 8% 88%, rgba(235,35,60,.20), transparent 18%),
+        linear-gradient(135deg, #1477c4, #58b9ee 45%, #d9f5ff 55%, #399ddd, #1268ae);
 }
 
 
-/* ✦✧✦ GLITTER JATUH ✦✧✦ */
+/* ✦ PARTIKEL JATUH — HANYA DI BACKGROUND */
 
-body::before {
-    content:
-        "✦  ✧  ·  ★  ✦  ♡  ·  ✧  ★  ✦  ·  ♡  ✧  ✦  ★  ·  ✦  ♡  ✧  ★";
-
+.y2k-particles {
     position: fixed;
-    top: -120px;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.y2k-particles::before {
+    content: "✦  ·  ✧  ·  ★  ·  ✦  ·  ✧  ·  ★  ·  ✦  ·  ✧";
+
+    position: absolute;
+    top: -100px;
     left: 0;
 
     width: 100%;
-    height: 120%;
+    color: rgba(255,255,255,.7);
 
-    color: rgba(255,255,255,.9);
+    font-size: 13px;
+    line-height: 90px;
+    letter-spacing: 35px;
+    word-spacing: 20px;
 
-    font-size: 15px;
-    line-height: 75px;
-    letter-spacing: 30px;
-    word-spacing: 18px;
-
-    pointer-events: none;
-    z-index: 1;
-
-    animation: y2kRain 13s linear infinite;
+    animation: fallingStars 14s linear infinite;
 }
 
-@keyframes y2kRain {
-    0% {
-        transform: translateY(-100px) translateX(0);
+@keyframes fallingStars {
+    from {
+        transform: translateY(-100px);
     }
 
-    50% {
-        transform: translateY(50vh) translateX(25px);
-    }
-
-    100% {
-        transform: translateY(110vh) translateX(-25px);
+    to {
+        transform: translateY(110vh);
     }
 }
 
 
-/* ❤️❤️❤️ HATI MERAH JATUH ❤️❤️❤️ */
+/* ❤️ HATI MERAH — SEDIKIT */
 
-body::after {
-    content:
-        "♥    ♥       ♥    ♥       ♥       ♥    ♥       ♥    ♥";
+.y2k-particles::after {
+    content: "♥       ♥          ♥       ♥";
 
-    position: fixed;
-    top: -150px;
-    left: 0;
+    position: absolute;
+    top: -100px;
+    left: 5%;
 
     width: 100%;
-    height: 130%;
 
-    color: rgba(239,45,70,.7);
+    color: rgba(235,35,60,.55);
 
-    font-size: 12px;
-    line-height: 130px;
-    letter-spacing: 45px;
+    font-size: 11px;
+    line-height: 180px;
+    letter-spacing: 60px;
 
-    pointer-events: none;
-    z-index: 1;
-
-    animation: heartsRain 18s linear infinite;
+    animation: fallingHearts 18s linear infinite;
 }
 
-@keyframes heartsRain {
-    0% {
-        transform: translateY(-120px) rotate(-2deg);
+@keyframes fallingHearts {
+    from {
+        transform: translateY(-100px);
     }
 
-    50% {
-        transform: translateY(50vh) translateX(-20px) rotate(4deg);
-    }
-
-    100% {
-        transform: translateY(115vh) translateX(25px) rotate(-3deg);
+    to {
+        transform: translateY(110vh);
     }
 }
 
 
-/* 💿 CHROME CD */
+/* 💿 CD — NONGOL DARI PINGGIR */
 
 .y2k-disc {
-    position: absolute;
+    position: fixed;
+    z-index: 1;
+    pointer-events: none;
 
-    width: 95px;
-    height: 95px;
+    width: 75px;
+    height: 75px;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
             circle,
-            #ffffff 0 5%,
-            #9edfff 6% 12%,
-            #197bc5 13% 20%,
-            #eafaff 21% 28%,
-            #55b8ed 29% 40%,
-            #ffffff 41% 48%,
-            #1975bc 49% 62%,
-            #bdeeff 63% 75%,
-            #1971b8 76% 100%
+            #fff 0 6%,
+            #9cddff 7% 15%,
+            #1478c2 16% 25%,
+            #e7faff 26% 35%,
+            #42a9e2 36% 50%,
+            #fff 51% 58%,
+            #1674b9 59% 75%,
+            #bcecff 76%
         );
 
-    border: 2px solid rgba(255,255,255,.8);
+    opacity: .45;
 
     box-shadow:
-        0 0 10px rgba(255,255,255,.9),
-        0 0 25px rgba(50,170,240,.8);
+        0 0 12px rgba(255,255,255,.8),
+        0 0 22px rgba(40,160,230,.6);
 
-    opacity: .55;
-
-    animation: cdSpin 9s linear infinite;
+    animation: cdMove 10s ease-in-out infinite;
 }
 
 .disc1 {
-    left: -25px;
-    top: 20%;
+    left: -35px;
+    top: 18%;
 }
 
 .disc2 {
-    right: -25px;
-    top: 62%;
-    width: 75px;
-    height: 75px;
-
-    animation-duration: 12s;
-    animation-direction: reverse;
+    right: -35px;
+    bottom: 18%;
+    animation-delay: 3s;
 }
 
-@keyframes cdSpin {
-    from {
+@keyframes cdMove {
+    0%,100% {
         transform: rotate(0deg) translateY(0);
     }
 
     50% {
-        transform: rotate(180deg) translateY(-25px);
-    }
-
-    to {
-        transform: rotate(360deg) translateY(0);
+        transform: rotate(180deg) translateY(-18px);
     }
 }
 
 
-/* 🫧 BUBBLE GLOSSY */
+/* 🫧 BUBBLES — PINGGIR */
 
 .y2k-bubble {
-    position: absolute;
+    position: fixed;
+    z-index: 1;
+    pointer-events: none;
 
     border-radius: 50%;
 
-    border: 2px solid rgba(255,255,255,.7);
+    border: 2px solid rgba(255,255,255,.6);
 
     background:
         radial-gradient(
             circle at 30% 25%,
-            rgba(255,255,255,.95),
-            rgba(255,255,255,.15) 25%,
-            rgba(50,180,240,.18) 70%,
-            transparent
+            rgba(255,255,255,.8),
+            rgba(255,255,255,.1) 35%,
+            rgba(50,170,235,.15)
         );
 
     box-shadow:
-        inset -6px -8px 15px rgba(255,255,255,.25),
-        0 0 20px rgba(255,255,255,.4);
+        0 0 15px rgba(255,255,255,.4);
 
-    animation: bubbleMove 8s ease-in-out infinite;
+    animation: bubbleFloat 9s ease-in-out infinite;
 }
 
 .bubble1 {
-    width: 45px;
-    height: 45px;
-    left: 6%;
-    top: 35%;
+    width: 35px;
+    height: 35px;
+    left: 3%;
+    top: 38%;
 }
 
 .bubble2 {
-    width: 25px;
-    height: 25px;
-    left: 25%;
-    top: 75%;
+    width: 22px;
+    height: 22px;
+    right: 4%;
+    top: 30%;
     animation-delay: 2s;
 }
 
 .bubble3 {
-    width: 60px;
-    height: 60px;
-    right: 4%;
-    top: 35%;
+    width: 45px;
+    height: 45px;
+    right: 3%;
+    bottom: 12%;
     animation-delay: 4s;
 }
 
-@keyframes bubbleMove {
+@keyframes bubbleFloat {
     0%,100% {
-        transform: translateY(20px) translateX(0);
+        transform: translateY(15px);
     }
 
     50% {
-        transform: translateY(-45px) translateX(20px);
+        transform: translateY(-25px);
     }
 }
 
 
-/* ✦ SPARKLE BESAR ✦ */
+/* ✦ SPARKLE DI SUDUT */
 
 .y2k-star {
-    position: absolute;
+    position: fixed;
+    z-index: 1;
+    pointer-events: none;
 
     color: white;
 
     text-shadow:
-        0 0 5px white,
-        0 0 12px #45baff,
-        0 0 25px #1685d0;
+        0 0 6px white,
+        0 0 14px #42b7f5,
+        0 0 22px #147bc5;
 
-    animation: sparkle 2.5s ease-in-out infinite;
+    animation: sparkle 3s ease-in-out infinite;
 }
 
 .star1 {
-    left: 7%;
-    top: 18%;
-    font-size: 35px;
+    left: 6%;
+    top: 20%;
+    font-size: 27px;
 }
 
 .star2 {
-    right: 8%;
-    top: 22%;
-    font-size: 25px;
-    animation-delay: .7s;
+    right: 7%;
+    top: 18%;
+    font-size: 20px;
+    animation-delay: 1s;
 }
 
 .star3 {
-    left: 13%;
-    bottom: 18%;
-    font-size: 22px;
+    left: 7%;
+    bottom: 20%;
+    font-size: 18px;
 
-    color: #ef304b;
+    color: #ed3049;
 
     text-shadow:
-        0 0 6px white,
-        0 0 14px #ef304b,
-        0 0 25px #ef304b;
-
-    animation-delay: 1.3s;
+        0 0 7px white,
+        0 0 15px #ed3049;
 }
 
 .star4 {
-    right: 18%;
-    bottom: 20%;
-    font-size: 32px;
-    animation-delay: 1.8s;
+    right: 8%;
+    bottom: 25%;
+    font-size: 25px;
+    animation-delay: 2s;
 }
 
 @keyframes sparkle {
@@ -782,113 +753,16 @@ body::after {
 
     50% {
         opacity: 1;
-        transform: scale(1.35) rotate(25deg);
+        transform: scale(1.2) rotate(15deg);
     }
 }
 
 
-/* ❤️ MERAH DI WINDOW */
+/* 💙❤️ AREA TENGAH SELALU DI ATAS */
 
 .window {
-    box-shadow:
-        0 0 0 3px #1675be,
-        0 0 0 6px rgba(239,45,70,.22),
-        8px 10px 0 rgba(5,50,100,.25),
-        0 0 30px rgba(255,255,255,.8);
-}
-
-
-/* 💙 TOMBOL BIRU → ❤️ MERAH SAAT HOVER */
-
-.next-button {
-    background:
-        linear-gradient(
-            135deg,
-            #2aa4ef,
-            #0756a5
-        );
-
-    border: 2px solid rgba(255,255,255,.8);
-
-    box-shadow:
-        0 4px 0 #06467f,
-        0 0 15px rgba(60,190,255,.6);
-}
-
-.next-button:hover {
-    background:
-        linear-gradient(
-            135deg,
-            #ff4b62,
-            #c91d3b
-        );
-
-    box-shadow:
-        0 4px 0 #8d1528,
-        0 0 25px rgba(239,45,70,.7);
-}
-
-
-/* ✨ KILAU CHROME */
-
-.window::before {
-    content: "";
-    position: absolute;
-
-    top: 0;
-    left: -100%;
-
-    width: 60%;
-    height: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.35),
-            transparent
-        );
-
-    transform: skewX(-20deg);
-
-    animation: chromeShine 5s ease-in-out infinite;
-
-    pointer-events: none;
-}
-
-@keyframes chromeShine {
-    0%,60% {
-        left: -100%;
-    }
-
-    80%,100% {
-        left: 140%;
-    }
-}
-
-
-/* ❤️ FINAL HEART */
-
-.final-heart {
-    color: #ef304b;
-
-    text-shadow:
-        0 0 5px white,
-        0 0 12px #ff6378,
-        0 0 25px #ef304b,
-        0 0 40px rgba(239,45,70,.5);
-
-    animation: finalHeart 1.5s ease-in-out infinite;
-}
-
-@keyframes finalHeart {
-    0%,100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.18);
-    }
+    position: relative;
+    z-index: 5;
 }
 </style>
 </head>
